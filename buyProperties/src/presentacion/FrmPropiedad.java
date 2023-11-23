@@ -452,29 +452,21 @@ public class FrmPropiedad extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnDesactivarActionPerformed
 
     private void btnActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActivarActionPerformed
-        if (tablaListado.getSelectedRowCount() == 1){
-            String id = String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(), 0));
-            String nombre = String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(), 1));
-            this.nombreAnt = String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(), 1));
-            String direccion = String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(), 2));
-            String precioAlquiler= String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(),3));
-            String caracteristicas = String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(), 4));
-
+        if (tablaListado.getSelectedRowCount() == 1) {
+            String id= String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(),0));
+            String nombre= String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(),1));
             
-            txtId.setText(id);
-            txtNombre.setText(nombre);
-            txtDireccion.setText(direccion);
-            txtPrecioAlquiler.setText(precioAlquiler);
-            txtCaracteristicas.setText(caracteristicas);
-            
-            tabGeneral.setEnabledAt(0, false);
-            tabGeneral.setEnabledAt(1, true);
-            tabGeneral.setSelectedIndex(1);
-            this.accion = "editar";
-            btnGuardar.setText("Editar");
-            
-        }else{
-            this.mensajeError("Seleccione 1 registro a editar.");
+            if(JOptionPane.showConfirmDialog(this,"Deseas activar el registro: " + nombre + " ?", "Desactivar", JOptionPane.YES_NO_OPTION)==0){
+                String resp=this.CONTROL.activar(Integer.parseInt(id));
+                if (resp.equals("OK")){
+                    this.mensajeOk("Registro Activado");
+                    this.listar("");
+                }else{
+                    this.mensajeError(resp);
+                }
+            }
+        } else {
+            this.mensajeError("Seleccione 1 registro a Activar.");
         }
     }//GEN-LAST:event_btnActivarActionPerformed
 
